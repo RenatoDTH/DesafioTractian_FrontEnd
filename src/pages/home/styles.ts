@@ -35,14 +35,20 @@ export const TextContent = styled.div`
 
 export const Image = styled.img`
   align-self: center;
+  margin-top: 60px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 780px) {
     width: 500px;
     height: 280px;
   }
 
-  @media screen and (max-width: 500px) {
-    width: 240px;
+  @media screen and (max-width: 537px) {
+    width: 360px;
+    height: 200px;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 260px;
     height: 120px;
   }
 `;

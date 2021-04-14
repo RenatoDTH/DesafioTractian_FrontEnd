@@ -10,7 +10,6 @@ export const Container = styled.div`
   margin: 40px auto;
   padding: 28px;
   border-radius: 12px;
-  justify-content: space-between;
 
   @media screen and (max-width: 768px) {
     margin: auto;
