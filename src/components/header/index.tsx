@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from '../index';
 
@@ -23,6 +23,9 @@ const Header: React.FC = () => {
             <span>Unidades</span>
           </Link>
           <Link to="/">
+            <span>Ativos</span>
+          </Link>
+          <Link to="/">
             <span>Usuários</span>
           </Link>
           <Link to="/">
@@ -34,4 +37,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
