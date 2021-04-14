@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import Exporting from 'highcharts/modules/exporting';
 import { ContainerContent, Header } from '../../components';
 import { ICompanies, IUnits, IAssets, IUsers } from '../../models';
 import api from '../../services/api';
 
-import { Container } from './styles';
+import { Container, ContainerGraph } from './styles';
+
+Exporting(Highcharts);
 
 const Companies: React.FC = () => {
   const [companies, setCompanies] = useState<ICompanies[]>([]);
@@ -35,6 +40,67 @@ const Companies: React.FC = () => {
     });
   }, []);
 
+  const option = {
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie',
+      backgroundColor: '#f8f8f8',
+      borderRadius: 12,
+    },
+
+    title: {
+      text: 'Informações básicas da Tractian',
+    },
+    tooltip: {
+      pointFormat:
+        '{series.name}: <b>{point.percentage:.1f}%</b> <br/>' +
+        '{series.name}: <b>{point.y}</b><br/>',
+    },
+    accessibility: {
+      point: {
+        valueSuffix: '%',
+      },
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: false,
+        },
+        showInLegend: true,
+      },
+    },
+    series: [
+      {
+        name: 'Data',
+        colorByPoint: true,
+        data: [
+          {
+            name: 'Empresa',
+            y: companies.length,
+            sliced: true,
+            selected: true,
+          },
+          {
+            name: 'Unidades',
+            y: units.length,
+          },
+          {
+            name: 'Ativos',
+            y: assets.length,
+          },
+          {
+            name: 'Usuários',
+            y: users.length,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
       <Header />
@@ -60,6 +126,10 @@ const Companies: React.FC = () => {
             Os planos para o futuro é apresentar uma estratégia mais agressiva
             para o <span>crescimento</span> da empresa.
           </p>
+
+          <ContainerGraph>
+            <HighchartsReact highcharts={Highcharts} options={option} />
+          </ContainerGraph>
         </ContainerContent>
       </Container>
     </>
