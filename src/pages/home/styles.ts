@@ -9,18 +9,7 @@ export const Container = styled.div`
   }
 `;
 
-export const ContainerContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: rgba(255, 255, 255, 0.2);
-  max-width: 900px;
-  align-items: flex-start;
-  margin: 40px auto;
-  padding: 28px;
-  border-radius: 12px;
-  justify-content: space-between;
-
+export const TextContent = styled.div`
   p {
     font-size: 28px;
     line-height: 48px;
@@ -32,9 +21,6 @@ export const ContainerContent = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    margin: auto;
-    max-width: 100%;
-
     p {
       font-size: 18px;
       line-height: 24px;
