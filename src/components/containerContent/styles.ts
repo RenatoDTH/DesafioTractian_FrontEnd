@@ -10,6 +10,7 @@ export const Container = styled.div`
   margin: 40px auto;
   padding: 28px;
   border-radius: 12px;
+  flex: 1;
 
   @media screen and (max-width: 768px) {
     margin: auto;
