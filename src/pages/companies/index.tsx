@@ -6,7 +6,7 @@ import { ContainerContent, Header } from '../../components';
 import { ICompanies, IUnits, IAssets, IUsers } from '../../models';
 import api from '../../services/api';
 
-import { Container, ContainerGraph } from './styles';
+import { Container, ContainerGraph, TextContent } from './styles';
 
 Exporting(Highcharts);
 
@@ -51,7 +51,7 @@ const Companies: React.FC = () => {
     },
 
     title: {
-      text: 'Informações básicas da Tractian',
+      text: `Informações da empresa ${companies[0]?.name}`,
     },
     tooltip: {
       pointFormat:
@@ -106,27 +106,30 @@ const Companies: React.FC = () => {
       <Header />
       <Container>
         <ContainerContent>
-          <p>
-            A Tractian conhecida pelo monitoramento de máquinas com sua própria
-            tecnlogia tem crescido a cada ano.
-          </p>
-          <p>
-            Hoje nós temos {companies.length}{' '}
-            {companies.length === 1 ? 'empresa' : 'empresas'} e possuímos em
-            nossas dependências {units.length}{' '}
-            {units.length === 1 ? ' unidade' : ' unidades'} que se destacam das
-            mais diversas formas.
-          </p>
-          <p>
-            Possuímos exatos {assets.length}{' '}
-            {assets.length === 1 ? 'ativo' : 'ativos'} e {users.length}{' '}
-            {users.length === 1 ? 'usuário' : 'usuários'} ativos no momento.
-          </p>
-          <p>
-            Os planos para o futuro é apresentar uma estratégia mais agressiva
-            para o <span>crescimento</span> da empresa.
-          </p>
+          <TextContent>
+            <p>
+              A Tractian conhecida pelo monitoramento de máquinas com sua
+              própria tecnlogia tem crescido a cada ano.
+            </p>
+            <p>
+              Hoje nós temos {companies.length}{' '}
+              {companies.length === 1 ? 'empresa' : 'empresas'} e possuímos em
+              nossas dependências {units.length}{' '}
+              {units.length === 1 ? ' unidade' : ' unidades'} que se destacam
+              das mais diversas formas.
+            </p>
+            <p>
+              Possuímos exatos {assets.length}{' '}
+              {assets.length === 1 ? 'ativo' : 'ativos'} e {users.length}{' '}
+              {users.length === 1 ? 'usuário' : 'usuários'} ativos no momento.
+            </p>
+            <p>
+              Os planos para o futuro é apresentar uma estratégia mais agressiva
+              para o <span>crescimento</span> da empresa.
+            </p>
 
+            <p>Segue os dados base como exemplo da {companies[0]?.name}:</p>
+          </TextContent>
           <ContainerGraph>
             <HighchartsReact highcharts={Highcharts} options={option} />
           </ContainerGraph>
