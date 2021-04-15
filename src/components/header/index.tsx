@@ -25,7 +25,7 @@ const Header: React.FC = () => {
           <Link to="/assets">
             <span>Ativos</span>
           </Link>
-          <Link to="/">
+          <Link to="/users">
             <span>Usuários</span>
           </Link>
           <Link to="/">

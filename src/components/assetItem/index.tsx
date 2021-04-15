@@ -31,7 +31,12 @@ const UnityItem: React.FC<IAssetItemProps> = ({ asset }) => {
         <button type="button" onClick={handleOpenModal}>
           Mais informações
         </button>
-        <Modal open={open} onClose={handleCloseModal} center>
+        <Modal
+          open={open}
+          onClose={handleCloseModal}
+          center
+          styles={{ modal: { borderRadius: '12px' } }}
+        >
           <ModalContent>
             <h2>{asset.name}</h2>
             <p>Modelo: {asset.model}</p>
