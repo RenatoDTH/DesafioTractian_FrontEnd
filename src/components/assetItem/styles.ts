@@ -24,6 +24,11 @@ export const Container = styled.div`
     border-radius: 0 0 12px 12px;
     outline: 0;
     background-color: #f8f8f8;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
   }
 `;
 
