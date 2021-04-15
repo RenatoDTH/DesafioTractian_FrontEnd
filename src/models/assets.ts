@@ -8,8 +8,8 @@ export interface IAssets {
   image: string;
   metrics: {
     totalCollectsUptime?: number;
-    totalUptime?: number;
-    lastUptimeAt?: string;
+    totalUptime: number;
+    lastUptimeAt: string;
   };
   specifications: {
     maxTemp?: number;

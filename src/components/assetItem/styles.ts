@@ -26,3 +26,15 @@ export const Container = styled.div`
     background-color: #f8f8f8;
   }
 `;
+
+export const ModalContent = styled.div`
+  p {
+    color: #1e3a8a;
+    font-weight: 500;
+  }
+
+  h1 {
+    color: #1e3a8a;
+    font-weight: 700;
+  }
+`;
