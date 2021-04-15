@@ -22,7 +22,7 @@ const Header: React.FC = () => {
           <Link to="/units">
             <span>Unidades</span>
           </Link>
-          <Link to="/">
+          <Link to="/assets">
             <span>Ativos</span>
           </Link>
           <Link to="/">

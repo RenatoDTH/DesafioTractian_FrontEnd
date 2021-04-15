@@ -15,4 +15,9 @@ export const Container = styled.button`
     background: #1e3a8a;
     color: #f8f8f8;
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+    font-weight: 400;
+  }
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IUnits, ICompanies } from '../../models';
+import { IUnits } from '../../models';
 
 import { Container } from './styles';
 
