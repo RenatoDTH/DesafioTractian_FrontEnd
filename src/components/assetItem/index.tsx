@@ -26,7 +26,7 @@ const UnityItem: React.FC<IAssetItemProps> = ({ asset }) => {
       <Container>
         <img src={asset.image} alt={asset.name} />
         <strong>{asset.name}</strong>
-        <span>Modelo: {asset.model}</span>
+        <span>Modelo: {asset.model === 'motor' ? 'Motor' : 'Ventilador'}</span>
         <span>Sensor: {asset.sensors}</span>
         <button type="button" onClick={handleOpenModal}>
           Mais informações
@@ -39,7 +39,7 @@ const UnityItem: React.FC<IAssetItemProps> = ({ asset }) => {
         >
           <ModalContent>
             <h2>{asset.name}</h2>
-            <p>Modelo: {asset.model}</p>
+            <p>Modelo: {asset.model === 'motor' ? 'Motor' : 'Ventilador'}</p>
             {asset.status === 'inAlert' && (
               <p>
                 Status: <span style={{ color: '#de9d26' }}>Em alerta</span>
