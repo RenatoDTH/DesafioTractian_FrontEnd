@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ContainerContent, Header, AssetItem } from '../../components';
+import {
+  Button,
+  ContainerContent,
+  Header,
+  AssetItem,
+  ButtonContainer,
+  ContentWrap,
+} from '../../components';
 import { IUnits, IAssets } from '../../models';
 import api from '../../services/api';
 
-import { Container, ButtonContainer, Content } from './styles';
+import { Container } from './styles';
 
 const Assets: React.FC = () => {
   const [units, setUnits] = useState<IUnits[]>([]);
@@ -61,11 +68,11 @@ const Assets: React.FC = () => {
             <Button onClick={handleUnity1}>{units[0]?.name}</Button>
             <Button onClick={handleUnity2}>{units[1]?.name}</Button>
           </ButtonContainer>
-          <Content>
+          <ContentWrap>
             {assets.map((asset: IAssets) => (
               <AssetItem key={asset.id} asset={asset} />
             ))}
-          </Content>
+          </ContentWrap>
         </ContainerContent>
       </Container>
     </>

@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { ContainerContent, Header, Button, UserItem } from '../../components';
+import {
+  ContainerContent,
+  Header,
+  Button,
+  UserItem,
+  ButtonContainer,
+  ContentWrap,
+} from '../../components';
 import { IUnits, IUsers } from '../../models';
 import api from '../../services/api';
 
-import { Container, ButtonContainer, Content } from './styles';
+import { Container } from './styles';
 
 const Users: React.FC = () => {
   const [units, setUnits] = useState<IUnits[]>([]);
@@ -61,11 +68,11 @@ const Users: React.FC = () => {
             <Button onClick={handleUnity1}>{units[0]?.name}</Button>
             <Button onClick={handleUnity2}>{units[1]?.name}</Button>
           </ButtonContainer>
-          <Content>
+          <ContentWrap>
             {users.map((user: IUsers) => (
               <UserItem key={user.id} user={user} />
             ))}
-          </Content>
+          </ContentWrap>
         </ContainerContent>
       </Container>
     </>

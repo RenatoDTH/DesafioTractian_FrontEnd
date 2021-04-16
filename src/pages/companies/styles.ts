@@ -7,15 +7,6 @@ export const Container = styled.div`
   }
 `;
 
-export const ContainerGraph = styled.div`
-  align-self: center;
-  margin-top: 40px;
-
-  @media screen and (max-width: 500px) {
-    width: 300px;
-  }
-`;
-
 export const TextContent = styled.div`
   p {
     font-size: 22px;

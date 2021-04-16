@@ -3,16 +3,17 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Exporting from 'highcharts/modules/exporting';
 import { IUnits, IAssets, IUsers } from '../../models';
-import { ContainerContent, Header, Button, UnityItem } from '../../components';
+import {
+  ContainerContent,
+  Header,
+  Button,
+  UnityItem,
+  ContentGraph,
+  ButtonContainer,
+} from '../../components';
 import api from '../../services/api';
 
-import {
-  Container,
-  ButtonContainer,
-  Content,
-  ContentItem,
-  ContentGraph,
-} from './styles';
+import { Container, Content, ContentItem } from './styles';
 
 Exporting(Highcharts);
 

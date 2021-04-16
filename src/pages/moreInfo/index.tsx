@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Exporting from 'highcharts/modules/exporting';
-import { Button, ContainerContent, Header } from '../../components';
+import {
+  Button,
+  ContainerContent,
+  Header,
+  ContentGraph,
+  ButtonContainer,
+} from '../../components';
 import { IAssets } from '../../models';
 import api from '../../services/api';
 
-import {
-  Container,
-  ButtonContainer,
-  Content,
-  ContentGraph,
-  TextContent,
-} from './styles';
+import { Container, Content, TextContent } from './styles';
 
 Exporting(Highcharts);
 

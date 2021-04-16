@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Exporting from 'highcharts/modules/exporting';
-import { ContainerContent, Header } from '../../components';
+import { ContainerContent, Header, ContentGraph } from '../../components';
 import { ICompanies, IUnits, IAssets, IUsers } from '../../models';
 import api from '../../services/api';
 
-import { Container, ContainerGraph, TextContent } from './styles';
+import { Container, TextContent } from './styles';
 
 Exporting(Highcharts);
 
@@ -130,9 +130,9 @@ const Companies: React.FC = () => {
 
             <p>Segue os dados base como exemplo da {companies[0]?.name}:</p>
           </TextContent>
-          <ContainerGraph>
+          <ContentGraph>
             <HighchartsReact highcharts={Highcharts} options={option} />
-          </ContainerGraph>
+          </ContentGraph>
         </ContainerContent>
       </Container>
     </>
