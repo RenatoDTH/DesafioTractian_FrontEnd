@@ -26,22 +26,29 @@ const Unity: React.FC = () => {
   const [assetsFiltered, setAssetsFiltered] = useState<IAssets[]>([]);
   const [users, setUsers] = useState<IUsers[]>([]);
   const [usersFiltered, setUsersFiltered] = useState<IUsers[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     api.get('units').then((response) => {
+      setIsLoading(true);
       setUnits(response.data);
+      setIsLoading(false);
     });
   }, []);
 
   useEffect(() => {
     api.get('assets').then((response) => {
+      setIsLoading(true);
       setAssets(response.data);
+      setIsLoading(false);
     });
   }, []);
 
   useEffect(() => {
     api.get('users').then((response) => {
+      setIsLoading(true);
       setUsers(response.data);
+      setIsLoading(false);
     });
   }, []);
 
@@ -128,9 +135,15 @@ const Unity: React.FC = () => {
       <Container>
         <ContainerContent>
           <ButtonContainer>
-            <Button onClick={handleAllUnities}>Todas as unidades</Button>
-            <Button onClick={handleUnity1}>{units[0]?.name}</Button>
-            <Button onClick={handleUnity2}>{units[1]?.name}</Button>
+            <Button onClick={handleAllUnities}>
+              {isLoading ? 'Carregando' : 'Todas as unidades'}
+            </Button>
+            <Button onClick={handleUnity1}>
+              {isLoading ? 'Carregando' : units[0]?.name}
+            </Button>
+            <Button onClick={handleUnity2}>
+              {isLoading ? 'Carregando' : units[1]?.name}
+            </Button>
           </ButtonContainer>
           <Content>
             {allUnities && (

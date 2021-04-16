@@ -15,16 +15,21 @@ import { Container } from './styles';
 const Assets: React.FC = () => {
   const [units, setUnits] = useState<IUnits[]>([]);
   const [assets, setAssets] = useState<IAssets[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     api.get('units').then((response) => {
+      setIsLoading(true);
       setUnits(response.data);
+      setIsLoading(false);
     });
   }, []);
 
   useEffect(() => {
     api.get('assets').then((response) => {
+      setIsLoading(true);
       setAssets(response.data);
+      setIsLoading(false);
     });
   }, []);
 
@@ -64,9 +69,15 @@ const Assets: React.FC = () => {
       <Container>
         <ContainerContent>
           <ButtonContainer>
-            <Button onClick={handleAllUnities}>Ativos</Button>
-            <Button onClick={handleUnity1}>{units[0]?.name}</Button>
-            <Button onClick={handleUnity2}>{units[1]?.name}</Button>
+            <Button onClick={handleAllUnities}>
+              {isLoading ? 'Carregando' : 'Ativos'}
+            </Button>
+            <Button onClick={handleUnity1}>
+              {isLoading ? 'Carregando' : units[0]?.name}
+            </Button>
+            <Button onClick={handleUnity2}>
+              {isLoading ? 'Carregando' : units[1]?.name}
+            </Button>
           </ButtonContainer>
           <ContentWrap>
             {assets.map((asset: IAssets) => (
