@@ -7,14 +7,14 @@ export interface IAssets {
   name: string;
   image: string;
   metrics: {
-    totalCollectsUptime?: number;
+    totalCollectsUptime: number;
     totalUptime: number;
     lastUptimeAt: string;
   };
   specifications: {
-    maxTemp?: number;
-    rpm?: number | null;
-    power?: number;
+    maxTemp: number;
+    rpm: number | null;
+    power: number;
   };
   unitId: number;
   companyId: number;

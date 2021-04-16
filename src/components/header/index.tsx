@@ -28,7 +28,7 @@ const Header: React.FC = () => {
           <Link to="/users">
             <span>Usuários</span>
           </Link>
-          <Link to="/">
+          <Link to="/moreinfo">
             <span>Mais informações</span>
           </Link>
         </div>

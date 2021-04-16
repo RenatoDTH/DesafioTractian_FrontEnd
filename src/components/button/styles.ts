@@ -20,4 +20,10 @@ export const Container = styled.button`
     font-size: 12px;
     font-weight: 400;
   }
+
+  @media screen and (max-width: 450px) {
+    font-size: 10px;
+    font-weight: 400;
+    margin: 2px;
+  }
 `;
