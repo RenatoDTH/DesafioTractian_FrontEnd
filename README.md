@@ -34,6 +34,7 @@ Além disso, como foi descrito mais a cima, ele é totalmente responsivo, podend
 <li> Modal</li>
 <li> Loading com Lottie</li>
 <li> Responsividade</li>
+<li> Tratativa do erro 408 caso não faça a chamada a api</li>
 </ul>
 
 ## Dependências
