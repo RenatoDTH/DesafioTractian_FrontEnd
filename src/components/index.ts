@@ -9,3 +9,4 @@ export { default as ContentGraph } from './contentGraph';
 export { default as ButtonContainer } from './buttonContainer';
 export { default as ContentWrap } from './contentWrap';
 export { default as LoadAnimation } from './loadAnimation';
+export { default as ErrorAnimation } from './errorAnimation';

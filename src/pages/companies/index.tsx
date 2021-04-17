@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Exporting from 'highcharts/modules/exporting';
+import { useHistory } from 'react-router-dom';
 import {
   ContainerContent,
   Header,
@@ -22,23 +23,44 @@ const Companies: React.FC = () => {
   const [users, setUsers] = useState<IUsers[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const history = useHistory();
+
   useEffect(() => {
     setTimeout(() => {
       api.get('companies').then((response) => {
-        setCompanies(response.data);
+        if (response.status === 408) {
+          history.push('/error408');
+        } else {
+          setCompanies(response.data);
+        }
       });
+
       api.get('units').then((response) => {
-        setUnits(response.data);
+        if (response.status === 408) {
+          history.push('/error408');
+        } else {
+          setUnits(response.data);
+        }
       });
+
       api.get('assets').then((response) => {
-        setAssets(response.data);
+        if (response.status === 408) {
+          history.push('/error408');
+        } else {
+          setAssets(response.data);
+        }
       });
+
       api.get('users').then((response) => {
-        setUsers(response.data);
+        if (response.status === 408) {
+          history.push('/error408');
+        } else {
+          setUsers(response.data);
+        }
       });
       setIsLoading(false);
     }, 1 * 500);
-  }, []);
+  }, [history]);
 
   const option = {
     chart: {

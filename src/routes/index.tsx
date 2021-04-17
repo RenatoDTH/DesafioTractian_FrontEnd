@@ -1,6 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Companies, Home, Unity, Assets, Users, MoreInfo } from '../pages';
+import {
+  Companies,
+  Home,
+  Unity,
+  Assets,
+  Users,
+  MoreInfo,
+  Error408,
+} from '../pages';
 
 const Routes: React.FC = () => {
   return (
@@ -11,6 +19,7 @@ const Routes: React.FC = () => {
       <Route path="/assets" component={Assets} />
       <Route path="/users" component={Users} />
       <Route path="/moreinfo" component={MoreInfo} />
+      <Route path="/error408" component={Error408} />
     </Switch>
   );
 };

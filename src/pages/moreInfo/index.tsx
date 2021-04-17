@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Exporting from 'highcharts/modules/exporting';
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   ContainerContent,
@@ -24,15 +25,20 @@ const MoreInfo: React.FC = () => {
   const [rotation, setRotation] = useState(false);
   const [collectUpTime, setCollectUpTime] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     setTimeout(() => {
       api.get('assets').then((response) => {
-        setAssets(response.data);
+        if (response.status === 408) {
+          history.push('/error408');
+        } else {
+          setAssets(response.data);
+        }
       });
       setIsLoading(false);
     }, 1 * 500);
-  }, []);
+  }, [history]);
 
   const handleHealthButton = (): void => {
     setHealthButton(true);

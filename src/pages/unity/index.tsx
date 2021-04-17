@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Exporting from 'highcharts/modules/exporting';
+import { useHistory } from 'react-router-dom';
 import { IUnits, IAssets, IUsers } from '../../models';
+
 import {
   ContainerContent,
   Header,
@@ -28,26 +30,34 @@ const Unity: React.FC = () => {
   const [users, setUsers] = useState<IUsers[]>([]);
   const [usersFiltered, setUsersFiltered] = useState<IUsers[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    api.get('units').then((response) => {
-      setIsLoading(true);
-      setUnits(response.data);
-      setIsLoading(false);
-    });
-  }, []);
+  const history = useHistory();
 
   useEffect(() => {
     setTimeout(() => {
+      api.get('units').then((response) => {
+        if (response.status === 408) {
+          history.push('/error408');
+        } else {
+          setUnits(response.data);
+        }
+      });
       api.get('assets').then((response) => {
-        setAssets(response.data);
+        if (response.status === 408) {
+          history.push('/error408');
+        } else {
+          setAssets(response.data);
+        }
       });
       api.get('users').then((response) => {
-        setUsers(response.data);
+        if (response.status === 408) {
+          history.push('/error408');
+        } else {
+          setUsers(response.data);
+        }
       });
       setIsLoading(false);
     }, 1 * 500);
-  }, []);
+  }, [history]);
 
   const handleAllUnities = (): void => {
     setAllunities(true);

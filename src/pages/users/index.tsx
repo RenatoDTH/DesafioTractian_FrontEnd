@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   ContainerContent,
   Header,
@@ -17,18 +18,27 @@ const Users: React.FC = () => {
   const [units, setUnits] = useState<IUnits[]>([]);
   const [users, setUsers] = useState<IUsers[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     setTimeout(() => {
       api.get('units').then((response) => {
-        setUnits(response.data);
+        if (response.status === 408) {
+          history.push('/error408');
+        } else {
+          setUnits(response.data);
+        }
       });
       api.get('users').then((response) => {
-        setUsers(response.data);
+        if (response.status === 408) {
+          history.push('/error408');
+        } else {
+          setUsers(response.data);
+        }
       });
       setIsLoading(false);
     }, 1 * 500);
-  }, []);
+  }, [history]);
 
   const handleAllUnities = (): void => {
     api.get('users').then((response) => {
