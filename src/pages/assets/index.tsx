@@ -6,6 +6,7 @@ import {
   AssetItem,
   ButtonContainer,
   ContentWrap,
+  LoadAnimation,
 } from '../../components';
 import { IUnits, IAssets } from '../../models';
 import api from '../../services/api';
@@ -18,19 +19,15 @@ const Assets: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    api.get('units').then((response) => {
-      setIsLoading(true);
-      setUnits(response.data);
+    setTimeout(() => {
+      api.get('units').then((response) => {
+        setUnits(response.data);
+      });
+      api.get('assets').then((response) => {
+        setAssets(response.data);
+      });
       setIsLoading(false);
-    });
-  }, []);
-
-  useEffect(() => {
-    api.get('assets').then((response) => {
-      setIsLoading(true);
-      setAssets(response.data);
-      setIsLoading(false);
-    });
+    }, 1 * 500);
   }, []);
 
   const handleAllUnities = (): void => {
@@ -79,11 +76,17 @@ const Assets: React.FC = () => {
               {isLoading ? 'Carregando' : units[1]?.name}
             </Button>
           </ButtonContainer>
-          <ContentWrap>
-            {assets.map((asset: IAssets) => (
-              <AssetItem key={asset.id} asset={asset} />
-            ))}
-          </ContentWrap>
+          {isLoading ? (
+            <LoadAnimation />
+          ) : (
+            <>
+              <ContentWrap>
+                {assets.map((asset: IAssets) => (
+                  <AssetItem key={asset.id} asset={asset} />
+                ))}
+              </ContentWrap>
+            </>
+          )}
         </ContainerContent>
       </Container>
     </>

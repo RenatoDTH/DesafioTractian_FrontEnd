@@ -6,6 +6,7 @@ import {
   UserItem,
   ButtonContainer,
   ContentWrap,
+  LoadAnimation,
 } from '../../components';
 import { IUnits, IUsers } from '../../models';
 import api from '../../services/api';
@@ -18,19 +19,15 @@ const Users: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    api.get('units').then((response) => {
-      setIsLoading(true);
-      setUnits(response.data);
+    setTimeout(() => {
+      api.get('units').then((response) => {
+        setUnits(response.data);
+      });
+      api.get('users').then((response) => {
+        setUsers(response.data);
+      });
       setIsLoading(false);
-    });
-  }, []);
-
-  useEffect(() => {
-    api.get('users').then((response) => {
-      setIsLoading(true);
-      setUsers(response.data);
-      setIsLoading(false);
-    });
+    }, 1 * 500);
   }, []);
 
   const handleAllUnities = (): void => {
@@ -79,11 +76,17 @@ const Users: React.FC = () => {
               {isLoading ? 'Carregando' : units[1]?.name}
             </Button>
           </ButtonContainer>
-          <ContentWrap>
-            {users.map((user: IUsers) => (
-              <UserItem key={user.id} user={user} />
-            ))}
-          </ContentWrap>
+          {isLoading ? (
+            <LoadAnimation />
+          ) : (
+            <>
+              <ContentWrap>
+                {users.map((user: IUsers) => (
+                  <UserItem key={user.id} user={user} />
+                ))}
+              </ContentWrap>
+            </>
+          )}
         </ContainerContent>
       </Container>
     </>

@@ -8,6 +8,7 @@ import {
   Header,
   ContentGraph,
   ButtonContainer,
+  LoadAnimation,
 } from '../../components';
 import { IAssets } from '../../models';
 import api from '../../services/api';
@@ -22,11 +23,15 @@ const MoreInfo: React.FC = () => {
   const [power, setPower] = useState(false);
   const [rotation, setRotation] = useState(false);
   const [collectUpTime, setCollectUpTime] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    api.get('assets').then((response) => {
-      setAssets(response.data);
-    });
+    setTimeout(() => {
+      api.get('assets').then((response) => {
+        setAssets(response.data);
+      });
+      setIsLoading(false);
+    }, 1 * 500);
   }, []);
 
   const handleHealthButton = (): void => {
@@ -305,90 +310,97 @@ const MoreInfo: React.FC = () => {
             <Button onClick={handleTotalCollectsButton}>Coletas</Button>
           </ButtonContainer>
           <Content>
-            {healthButton && (
+            {isLoading ? (
+              <LoadAnimation />
+            ) : (
               <>
-                <TextContent>
-                  <p>
-                    No gráfico a seguir, podemos visualizar a relação de saúde
-                    pelo ativos, apresentando saúde dos nossos motores e
-                    ventiladores.
-                  </p>
-                  <p>
-                    Nele podemos verificar que a saúde de todos os motores são
-                    superiores a 70%, e dos ventiladores 50%.
-                  </p>
-                </TextContent>
-                <ContentGraph>
-                  <HighchartsReact
-                    highcharts={Highcharts}
-                    options={optionHealth}
-                  />
-                </ContentGraph>
-              </>
-            )}
+                {healthButton && (
+                  <>
+                    <TextContent>
+                      <p>
+                        No gráfico a seguir, podemos visualizar a relação de
+                        saúde pelo ativos, apresentando saúde dos nossos motores
+                        e ventiladores.
+                      </p>
+                      <p>
+                        Nele podemos verificar que a saúde de todos os motores
+                        são superiores a 70%, e dos ventiladores 50%.
+                      </p>
+                    </TextContent>
+                    <ContentGraph>
+                      <HighchartsReact
+                        highcharts={Highcharts}
+                        options={optionHealth}
+                      />
+                    </ContentGraph>
+                  </>
+                )}
 
-            {power && (
-              <>
-                <TextContent>
-                  <p>
-                    No gráfico a seguir, podemos visualizar a relação da
-                    potência pelo ativos.
-                  </p>
-                  <p>
-                    Nele podemos verificar que a potência em sua maioria é de
-                    1.5 kWh, mas faltam-lhe mais dados para melhor análise.
-                  </p>
-                </TextContent>
-                <ContentGraph>
-                  <HighchartsReact
-                    highcharts={Highcharts}
-                    options={optionPower}
-                  />
-                </ContentGraph>
-              </>
-            )}
+                {power && (
+                  <>
+                    <TextContent>
+                      <p>
+                        No gráfico a seguir, podemos visualizar a relação da
+                        potência pelo ativos.
+                      </p>
+                      <p>
+                        Nele podemos verificar que a potência em sua maioria é
+                        de 1.5 kWh, mas faltam-lhe mais dados para melhor
+                        análise.
+                      </p>
+                    </TextContent>
+                    <ContentGraph>
+                      <HighchartsReact
+                        highcharts={Highcharts}
+                        options={optionPower}
+                      />
+                    </ContentGraph>
+                  </>
+                )}
 
-            {rotation && (
-              <>
-                <TextContent>
-                  <p>
-                    No gráfico a seguir, podemos visualizar a relação da rotação
-                    dos ativos.
-                  </p>
-                  <p>
-                    Nele podemos verificar que a rotação dos motores, mesmo
-                    tendo poucos dados, é alta devido sua exigência e a dos
-                    ventiladores mais baixas e constantes.
-                  </p>
-                </TextContent>
-                <ContentGraph>
-                  <HighchartsReact
-                    highcharts={Highcharts}
-                    options={optionRotation}
-                  />
-                </ContentGraph>
-              </>
-            )}
+                {rotation && (
+                  <>
+                    <TextContent>
+                      <p>
+                        No gráfico a seguir, podemos visualizar a relação da
+                        rotação dos ativos.
+                      </p>
+                      <p>
+                        Nele podemos verificar que a rotação dos motores, mesmo
+                        tendo poucos dados, é alta devido sua exigência e a dos
+                        ventiladores mais baixas e constantes.
+                      </p>
+                    </TextContent>
+                    <ContentGraph>
+                      <HighchartsReact
+                        highcharts={Highcharts}
+                        options={optionRotation}
+                      />
+                    </ContentGraph>
+                  </>
+                )}
 
-            {collectUpTime && (
-              <>
-                <TextContent>
-                  <p>
-                    No gráfico a seguir, podemos visualizar a relação do total
-                    de coleta dos ativos.
-                  </p>
-                  <p>
-                    Nele podemos verificar que o número é bem elevado para todos
-                    os ativos com exceção de poucos, nos quais podem ter sido
-                    ativos mais novos ou com seu status: Em parada.
-                  </p>
-                </TextContent>
-                <ContentGraph>
-                  <HighchartsReact
-                    highcharts={Highcharts}
-                    options={optionTotalCollect}
-                  />
-                </ContentGraph>
+                {collectUpTime && (
+                  <>
+                    <TextContent>
+                      <p>
+                        No gráfico a seguir, podemos visualizar a relação do
+                        total de coleta dos ativos.
+                      </p>
+                      <p>
+                        Nele podemos verificar que o número é bem elevado para
+                        todos os ativos com exceção de poucos, nos quais podem
+                        ter sido ativos mais novos ou com seu status: Em parada.
+                      </p>
+                    </TextContent>
+                    <ContentGraph>
+                      <HighchartsReact
+                        highcharts={Highcharts}
+                        options={optionTotalCollect}
+                      />
+                    </ContentGraph>
+                  </>
+                )}
               </>
             )}
           </Content>

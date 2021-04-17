@@ -10,6 +10,7 @@ import {
   UnityItem,
   ContentGraph,
   ButtonContainer,
+  LoadAnimation,
 } from '../../components';
 import api from '../../services/api';
 
@@ -37,19 +38,15 @@ const Unity: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    api.get('assets').then((response) => {
-      setIsLoading(true);
-      setAssets(response.data);
+    setTimeout(() => {
+      api.get('assets').then((response) => {
+        setAssets(response.data);
+      });
+      api.get('users').then((response) => {
+        setUsers(response.data);
+      });
       setIsLoading(false);
-    });
-  }, []);
-
-  useEffect(() => {
-    api.get('users').then((response) => {
-      setIsLoading(true);
-      setUsers(response.data);
-      setIsLoading(false);
-    });
+    }, 1 * 500);
   }, []);
 
   const handleAllUnities = (): void => {
@@ -146,28 +143,34 @@ const Unity: React.FC = () => {
             </Button>
           </ButtonContainer>
           <Content>
-            {allUnities && (
+            {isLoading ? (
+              <LoadAnimation />
+            ) : (
               <>
-                <ContentItem>
-                  {units.map((unity: IUnits) => (
-                    <UnityItem key={unity.id} unity={unity} />
-                  ))}
-                </ContentItem>
-                <p>
-                  Estas unidades são os destaques no ramo da Tractian e o futuro
-                  pode aguardar novas surpresas
-                </p>
+                {allUnities && (
+                  <>
+                    <ContentItem>
+                      {units.map((unity: IUnits) => (
+                        <UnityItem key={unity.id} unity={unity} />
+                      ))}
+                    </ContentItem>
+                    <p>
+                      Estas unidades são os destaques no ramo da Tractian e o
+                      futuro pode aguardar novas surpresas
+                    </p>
+                  </>
+                )}
+                {unity0 && (
+                  <ContentGraph>
+                    <HighchartsReact highcharts={Highcharts} options={option} />
+                  </ContentGraph>
+                )}
+                {unity1 && (
+                  <ContentGraph>
+                    <HighchartsReact highcharts={Highcharts} options={option} />
+                  </ContentGraph>
+                )}
               </>
-            )}
-            {unity0 && (
-              <ContentGraph>
-                <HighchartsReact highcharts={Highcharts} options={option} />
-              </ContentGraph>
-            )}
-            {unity1 && (
-              <ContentGraph>
-                <HighchartsReact highcharts={Highcharts} options={option} />
-              </ContentGraph>
             )}
           </Content>
         </ContainerContent>
