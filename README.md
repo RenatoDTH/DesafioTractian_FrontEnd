@@ -32,7 +32,7 @@ Além disso, como foi descrito mais a cima, ele é totalmente responsivo, podend
 <li> Informações dinâmicas da fake api</li>
 <li> Gráficos relevantes aos dados</li>
 <li> Modal</li>
-<li> Loading para os botões</li>
+<li> Loading com Lottie</li>
 <li> Responsividade</li>
 </ul>
 
